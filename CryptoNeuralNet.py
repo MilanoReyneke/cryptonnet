@@ -183,7 +183,7 @@ for i in range(len(trainData)):
 
 #Testing net on data from the training set
 
-Net.predict(trainData[0][0])
+print(Net.predict(trainData[0][0]))
 
 
 # In[ ]:
