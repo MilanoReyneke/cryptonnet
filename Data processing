@@ -1,0 +1,36 @@
+import csv 
+import pandas as pd
+
+# Extracting and organising data to train and test neural net
+
+
+head = [ 'Unix Timestamp','Date', 'Symbol','Open','High','Low','Close','Volume BTC','Volume USD']
+
+coin_data = pd.read_csv('/Users/milanoreyneke/Downloads/HitBTC_BTCUSD_d.csv', sep=',', names=head)
+coin_data
+
+
+difference = coin_data['Open'] - coin_data['Close']
+
+for i in range(len(difference)):
+    if difference[i] > 0:
+        difference[i] = 1
+    else:
+        difference[i] = 0
+        
+
+twoWeekData = []
+totalData = []
+for i in range(26):
+    for j in range(14):
+        twoWeekData.append((coin_data['Open'][14*i + j]/100)) # dividing all data by 100 to prevent stack overflow
+        totalData.append(twoWeekData)
+    twoWeekData = []
+    
+    
+twoWeekDiff = []
+for i in range(26):
+    twoWeekDiff.append(difference[14*i])
+    
+# Array of training data
+trainData = list(zip(totalData, twoWeekDiff))          
