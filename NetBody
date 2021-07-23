@@ -111,3 +111,7 @@ class NeuralNet():
         else:
             pred = "Crypto price will decrease"
         return pred 
+
+
+# instantiate neural net
+Net = NeuralNet()
